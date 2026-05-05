@@ -2,7 +2,7 @@
 
 A simple full-stack starter project using:
 - React (frontend)
-- Laravel (backend API)
+- Expressjs (backend API)
 - Docker Compose (full environment)
 - SQL init script for database setup
 
@@ -10,7 +10,7 @@ A simple full-stack starter project using:
 ## Project Structure
 
 - client/ → React app
-- server/ → Laravel API
+- server/ → Expressjs API
 - db/ → Database initialization script
 - docker-compose.yml → Docker Compose file
 
@@ -49,18 +49,18 @@ Runs on: http://localhost:3000
 
 ---
 
-### 3. Backend (Laravel)
+### 3. Backend (Expressjs)
 Dependancies :
-- [PHP 8.2 or higher](https://www.php.net/downloads.php)
-- [Composer](https://getcomposer.org/download/)
+- [Nodejs 22 or higher](https://nodejs.org/en/download/)
+- [Npm](https://docs.npmjs.com/getting-started)
 
 ```bash
 cd server
-composer install
-php artisan serve
+npm install
+npm run dev
 ```
 
-Runs on: http://localhost:8000
+Runs on: http://localhost:4000
 
 
 ## Alternative: Run with Docker
