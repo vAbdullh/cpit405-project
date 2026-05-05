@@ -1,0 +1,23 @@
+{
+  "name": "expressjs-app",
+  "version": "1.0.0",
+  "description": "An Express.js RESTful API template",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon -L src/app.js"
+  },
+  "keywords": ["express", "api", "template", "rest"],
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
