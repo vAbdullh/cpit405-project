@@ -23,7 +23,7 @@ services:
       - ./server:/app
       - /app/node_modules
     environment:
-      - PORT=${PORT}
+      - SERVER_PORT=${SERVER_PORT}
       - SERVER_API_KEY=${SERVER_API_KEY}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
