@@ -9,8 +9,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./configs/swagger");
 
 const db = require("./configs/db");
-const userRoutes = require("./routes/userRoutes");
-const healthRoutes = require("./routes/healthRoutes");
+const apiRoutes = require("./routes");
 
 const SERVER_PORT = process.env.SERVER_PORT;
 const SERVER_API_KEY = process.env.SERVER_API_KEY;
@@ -38,9 +37,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/v1/api/health", healthRoutes);
+app.use("/v1/api", apiRoutes);
 app.use("/v1/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use("/v1/api/users", userRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });

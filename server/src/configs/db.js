@@ -1,32 +1,50 @@
+const { Pool } = require('pg');
+require('dotenv').config();
+
 /**
- * Fake Database Connection
- * Simulates a database connection for template purposes.
- * Replace with real DB logic (e.g. mongoose, knex, prisma) when needed.
+ * Real Database Connection using PostgreSQL
  */
 
-const fakeDb = {
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+});
+
+const db = {
   isConnected: false,
 
   connect: async () => {
-    console.log(`[DB] Connecting to ${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}...`);
-    // Simulate connection delay
-    await new Promise((resolve) => setTimeout(resolve, 300));
-    fakeDb.isConnected = true;
-    console.log("[DB] Connected successfully (fake)");
-    return true;
+    try {
+      console.log(`[DB] Connecting to ${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}...`);
+      const client = await pool.connect();
+      db.isConnected = true;
+      console.log("[DB] Connected successfully to PostgreSQL");
+      client.release();
+      return true;
+    } catch (error) {
+      console.error("[DB] Connection failed:", error.message);
+      db.isConnected = false;
+      throw error;
+    }
   },
 
   disconnect: async () => {
-    fakeDb.isConnected = false;
-    console.log("[DB] Disconnected");
+    await pool.end();
+    db.isConnected = false;
+    console.log("[DB] Disconnected from PostgreSQL");
   },
 
+  query: (text, params) => pool.query(text, params),
+
   getStatus: () => ({
-    connected: fakeDb.isConnected,
+    connected: db.isConnected,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     name: process.env.DB_NAME,
   }),
 };
 
-module.exports = fakeDb;
+module.exports = db;
