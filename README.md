@@ -71,6 +71,12 @@ docker compose up --build
 docker compose down
 ```
 
+### pgAdmin (Database Management)
+When running with Docker, you can access the database management panel:
+- **URL**: [http://localhost:5050](http://localhost:5050)
+- **Auto-login**: Enabled (takes you directly to the dashboard)
+- **Configuration**: Pre-connected to the `db` service.
+
 ---
 
 ## Database
