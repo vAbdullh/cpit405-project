@@ -21,7 +21,7 @@ echo "Updating Backend and Database containers..."
 docker-compose -f "$COMPOSE_FILE" up -d --build
 
 echo "Running Database Migrations..."
-docker-compose -f "$COMPOSE_FILE" exec -T server npx prisma migrate deploy
+docker-compose -f "$COMPOSE_FILE" exec -T server npx prisma db push
 
 echo "Cleaning up old Docker images..."
 docker image prune -f
