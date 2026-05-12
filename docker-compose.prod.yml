@@ -10,8 +10,14 @@ services:
       - "4000:4000"
     environment:
       - DATABASE_URL=postgresql://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?schema=public
+      - SERVER_PORT=${SERVER_PORT}
+      - SERVER_API_KEY=${SERVER_API_KEY}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
       - JWT_SECRET=${JWT_SECRET}
-      - SERVER_PORT=4000
     depends_on:
       - db
     restart: always
