@@ -17,7 +17,7 @@ export default function Auth() {
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  // If already logged in, redirect to the app dashboard
+  // If already logged in, redirect to the app app
   if (isAuthenticated) {
     return <Navigate to="/app" replace />;
   }
@@ -58,7 +58,7 @@ export default function Auth() {
             {isLogin ? 'Welcome Back' : 'Create Account'}
           </h2>
           <p className="text-sm text-muted-foreground text-center mb-8">
-            {isLogin ? 'Sign in to access your dashboard' : 'Join us to start managing your data'}
+            {isLogin ? 'Sign in to access your application' : 'Join us to start managing your data'}
           </p>
 
           {error && (
