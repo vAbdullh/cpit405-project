@@ -79,11 +79,33 @@ When running with Docker, you can access the database management panel:
 
 ---
 
-## Database
+## Database & Prisma
 
-Automatically initialized from:
-db/init.sql
+This project uses **Prisma ORM**. Whenever you update `server/prisma/schema.prisma`, you need to sync the changes:
+
+### 1. Sync Schema to Database
+Push your schema changes directly to the database:
+```bash
+cd server
+npx prisma db push
+```
+
+### 2. Generate Prisma Client
+Update the Prisma Client used in the code:
+```bash
+cd server
+npx prisma generate
+```
+
+### 3. View Data (Prisma Studio)
+Open a web-based GUI to manage your database records:
+```bash
+cd server
+npx prisma studio
+```
 
 ---
+
+## Alternative: Run with Docker
 
 
