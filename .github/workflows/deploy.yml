@@ -2,7 +2,7 @@ name: Auto Deploy
 
 on:
   push:
-    branches: [main, devOps-init]
+    branches: [main]
 
 concurrency:
   group: deploy
