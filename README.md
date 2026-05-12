@@ -91,7 +91,7 @@ npx prisma db push
 ```
 
 ### 2. Generate Prisma Client
-Update the Prisma Client used in the code:
+Update the Prisma Client used in the code - **IMPORTANT IN FIRST TIME**:
 ```bash
 cd server
 npx prisma generate
