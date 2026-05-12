@@ -1,0 +1,37 @@
+# Stage 1: Build and Generate Prisma
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install dependencies including devDependencies for Prisma generate
+COPY package*.json ./
+RUN npm ci
+
+# Copy Prisma schema and generate client
+COPY prisma ./prisma/
+RUN npx prisma generate
+
+# Copy source code
+COPY . .
+
+# Stage 2: Runtime
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package.json and install only production dependencies
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+# Copy generated Prisma client from builder
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma/client ./node_modules/@prisma/client
+
+# Copy source code and Prisma schema (needed for some Prisma features)
+COPY --from=builder /app/src ./src
+COPY --from=builder /app/prisma ./prisma
+
+EXPOSE 4000
+
+# Start the server
+CMD ["npm", "start"]
