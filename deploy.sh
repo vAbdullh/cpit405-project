@@ -14,6 +14,9 @@ git pull origin main
 echo "Building Frontend assets..."
 DOCKER_BUILDKIT=1 docker build -f client/Dockerfile.prod -o client/dist ./client
 
+echo "Stopping old containers..."
+docker-compose -f "$COMPOSE_FILE" down
+
 echo "Updating Backend and Database containers..."
 docker-compose -f "$COMPOSE_FILE" up -d --build
 
