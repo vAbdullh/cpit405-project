@@ -11,12 +11,12 @@ export default function Home() {
       <p className="text-xl text-muted-foreground">
         This is a placeholder for the Home page. We've set up React Router, Redux, Tailwind CSS v4, and Radix UI primitives.
       </p>
-      
+
       {/* Example of a Radix UI Component (Dialog) */}
       <div className="p-8 bg-card rounded-lg border shadow-sm mt-8">
         <h2 className="text-2xl font-bold mb-4">Radix UI Example</h2>
         <p className="text-muted-foreground mb-6">Below is an accessible Dialog (Modal) built with Radix UI.</p>
-        
+
         <Dialog.Root>
           <Dialog.Trigger asChild>
             <button className="bg-primary text-primary-foreground px-6 py-3 rounded-md font-medium hover:bg-primary/90 transition-colors">

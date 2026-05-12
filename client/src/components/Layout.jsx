@@ -29,9 +29,11 @@ export default function Layout() {
             </Link>
 
             {/* Protected Route Link */}
-            <Link to="/dashboard" className="text-sm font-medium hover:text-primary flex items-center gap-2">
-              <LayoutDashboard className="w-4 h-4" /> Dashboard
-            </Link>
+            {isAuthenticated && (
+              <Link to="/app" className="text-sm font-medium hover:text-primary flex items-center gap-2">
+                <LayoutDashboard className="w-4 h-4" /> App
+              </Link>
+            )}
 
             <div className="ml-4 border-l pl-4 border-border">
               {isAuthenticated ? (

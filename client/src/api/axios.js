@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/v1/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -33,11 +33,14 @@ apiClient.interceptors.response.use(
   },
   (error) => {
     // Handle global errors (like 401 Unauthorized)
-    if (error.response && error.response.status === 401) {
+    // Skip redirect for auth endpoints — let the login/register form handle those errors
+    const url = error.config?.url || '';
+    const isAuthRequest = url.includes('/auth/login') || url.includes('/auth/register');
+
+    if (error.response && error.response.status === 401 && !isAuthRequest) {
       console.error("Unauthorized access - possible invalid token or expired session");
-      // Optional: automatically clear token and redirect to login
-      // localStorage.removeItem('token');
-      // window.location.href = '/auth';
+      localStorage.removeItem('token');
+      window.location.href = '/auth';
     }
     return Promise.reject(error);
   }

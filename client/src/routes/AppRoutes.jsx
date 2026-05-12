@@ -10,7 +10,7 @@ import Home from '../pages/Home';
 import About from '../pages/About';
 import Team from '../pages/Team';
 import Auth from '../pages/Auth';
-import Dashboard from '../pages/Dashboard';
+import AppPage from '../pages/AppPage';
 
 export default function AppRoutes() {
   return (
@@ -24,7 +24,7 @@ export default function AppRoutes() {
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="app" element={<AppPage />} />
         </Route>
       </Route>
     </Routes>

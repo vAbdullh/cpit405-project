@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { BarChart3, Users, CreditCard, Activity } from 'lucide-react';
 
-export default function Dashboard() {
+export default function AppPage() {
   const user = useSelector((state) => state.auth.user);
 
   const stats = [
@@ -15,10 +15,10 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <h2 className="text-3xl font-bold tracking-tight">App Dashboard</h2>
       </div>
       <div className="bg-muted p-4 rounded-lg">
-        <p>Welcome back, <strong className="text-primary">{user?.name || 'User'}</strong>! You are viewing a protected route.</p>
+        <p>Welcome back, <strong className="text-primary">{user?.name || 'User'}</strong>! You are viewing the protected application area.</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
