@@ -15,7 +15,7 @@ export default function AppPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">App Dashboard</h2>
+        <h2 className="text-3xl font-bold tracking-tight">App Overview</h2>
       </div>
       <div className="bg-muted p-4 rounded-lg">
         <p>Welcome back, <strong className="text-primary">{user?.name || 'User'}</strong>! You are viewing the protected application area.</p>
