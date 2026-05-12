@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 // Layouts & Guards
 import Layout from '../components/Layout';
+import AppLayout from '../components/AppLayout';
 import ProtectedRoute from './ProtectedRoute';
 
 // Pages
@@ -15,16 +16,19 @@ import AppPage from '../pages/AppPage';
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Public Routes with standard Header/Footer */}
       <Route path="/" element={<Layout />}>
-        {/* Public Routes */}
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="team" element={<Team />} />
         <Route path="auth" element={<Auth />} />
+      </Route>
 
-        {/* Protected Routes */}
-        <Route element={<ProtectedRoute />}>
+      {/* Protected App Routes with Sidebar Layout */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<AppLayout />}>
           <Route path="app" element={<AppPage />} />
+          {/* Add more /app/* routes here */}
         </Route>
       </Route>
     </Routes>
