@@ -1,7 +1,16 @@
-FROM node:20-alpine
+# Build Stage
+FROM node:20-alpine AS builder
+
 WORKDIR /app
+
+# Set build-time environment variable for the API URL
+ENV VITE_API_URL=/v1/api
+
+COPY package*.json ./
+RUN npm ci
+
 COPY . .
-RUN npm ci --omit=dev
 RUN npm run build
-EXPOSE 3000
-CMD ["npm", "run", "start"]
+
+FROM scratch
+COPY --from=builder /app/dist /
