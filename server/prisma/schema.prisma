@@ -18,6 +18,9 @@ model User {
   createdTrips      Trip[]           @relation("CreatedTrips")
   memberships       TripMember[]
   invitationsSent   TripInvitation[] @relation("InvitationsSent")
+  expensesPaid      Expense[]        @relation("ExpensesPaid")
+  expensesCreated   Expense[]        @relation("ExpensesCreated")
+  expenseSplits     ExpenseSplit[]
 
   @@map("users")
 }
@@ -35,8 +38,40 @@ model Trip {
 
   members     TripMember[]
   invitations TripInvitation[]
+  expenses    Expense[]
 
   @@map("trips")
+}
+
+model Expense {
+  id          Int      @id @default(autoincrement())
+  tripId      Int
+  title       String   @db.VarChar(100)
+  amount      Decimal  @db.Decimal(10, 2)
+  paidById    Int
+  createdById Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  trip      Trip           @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  paidBy    User           @relation("ExpensesPaid", fields: [paidById], references: [id])
+  createdBy User           @relation("ExpensesCreated", fields: [createdById], references: [id])
+  splits    ExpenseSplit[]
+
+  @@map("expenses")
+}
+
+model ExpenseSplit {
+  expenseId Int
+  userId    Int
+  amount    Decimal @db.Decimal(10, 2)
+  isPaid    Boolean @default(false)
+
+  expense Expense @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([expenseId, userId])
+  @@map("expense_splits")
 }
 
 model TripMember {
