@@ -12,6 +12,9 @@ import About from '../pages/About';
 import Team from '../pages/Team';
 import Auth from '../pages/Auth';
 import AppPage from '../pages/AppPage';
+import TripsPage from '../pages/TripsPage';
+import TripDetails from '../pages/TripDetails';
+import InvitationsPage from '../pages/InvitationsPage';
 
 export default function AppRoutes() {
   return (
@@ -28,7 +31,9 @@ export default function AppRoutes() {
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
           <Route path="app" element={<AppPage />} />
-          {/* Add more /app/* routes here */}
+          <Route path="app/trips" element={<TripsPage />} />
+          <Route path="app/trips/:tripId" element={<TripDetails />} />
+          <Route path="app/invitations" element={<InvitationsPage />} />
         </Route>
       </Route>
     </Routes>
