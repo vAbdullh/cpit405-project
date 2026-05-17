@@ -54,6 +54,6 @@ router.post('/register', authController.register);
  *       401:
  *         description: Invalid credentials
  */
-router.post('/login', authController.login);
+router.get('/login', authController.login);
 
 module.exports = router;

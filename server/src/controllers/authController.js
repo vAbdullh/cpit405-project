@@ -12,6 +12,17 @@ const register = async (req, res) => {
     return res.status(400).json({ message: 'Name, email, and password are required' });
   }
 
+  // Strong password policy validation
+  if (password.length < 8 || 
+      !/[A-Z]/.test(password) || 
+      !/[a-z]/.test(password) || 
+      !/[0-9]/.test(password) || 
+      !/[^A-Za-z0-9]/.test(password)) {
+    return res.status(400).json({ 
+      message: 'Password must be at least 8 characters long, and contain at least one uppercase letter, one lowercase letter, one number, and one special character/symbol.' 
+    });
+  }
+
   try {
     // Check if user already exists
     const userExists = await User.findByEmail(email);

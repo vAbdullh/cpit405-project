@@ -38,7 +38,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/v1/api", apiRoutes);
+app.use("/api", apiRoutes);
 app.use("/v1/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
