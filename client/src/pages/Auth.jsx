@@ -33,6 +33,33 @@ export default function Auth() {
         dispatch(loginSuccess({ user: data.user, token: data.token }));
         navigate('/app');
       } else {
+        // Strong password validation (at least 8 chars, uppercase, lowercase, number, special character)
+        if (password.length < 8) {
+          setError('Password must be at least 8 characters long.');
+          setIsLoading(false);
+          return;
+        }
+        if (!/[A-Z]/.test(password)) {
+          setError('Password must contain at least one uppercase letter.');
+          setIsLoading(false);
+          return;
+        }
+        if (!/[a-z]/.test(password)) {
+          setError('Password must contain at least one lowercase letter.');
+          setIsLoading(false);
+          return;
+        }
+        if (!/[0-9]/.test(password)) {
+          setError('Password must contain at least one number.');
+          setIsLoading(false);
+          return;
+        }
+        if (!/[^A-Za-z0-9]/.test(password)) {
+          setError('Password must contain at least one special character/symbol.');
+          setIsLoading(false);
+          return;
+        }
+
         await authApi.register(name, email, password);
         setIsLogin(true);
         setError('Account created! Please sign in.');
@@ -116,6 +143,11 @@ export default function Auth() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {!isLogin && (
+                <p className="text-xs text-muted-foreground mt-1 px-1">
+                  Must be at least 8 characters, combining uppercase and lowercase letters, numbers, and symbols/special characters.
+                </p>
+              )}
             </div>
 
             <button

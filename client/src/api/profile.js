@@ -11,3 +11,12 @@ export const getProfile = async () => {
     throw error.response?.data || { message: 'Failed to fetch profile' };
   }
 };
+
+export const updateProfile = async (profileData) => {
+  try {
+    const response = await apiClient.put('/profile', profileData);
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { message: 'Failed to update profile' };
+  }
+};

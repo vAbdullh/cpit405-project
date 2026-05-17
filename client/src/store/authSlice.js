@@ -1,9 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const storedToken = localStorage.getItem('token');
+let storedUser = null;
+try {
+  const userJson = localStorage.getItem('user');
+  storedUser = userJson ? JSON.parse(userJson) : null;
+} catch (e) {
+  console.error('Failed to parse user from localStorage on init');
+}
+
 const initialState = {
-  isAuthenticated: false,
-  token: null,
-  user: null,
+  isAuthenticated: !!storedToken,
+  token: storedToken || null,
+  user: storedUser || null,
 };
 
 export const authSlice = createSlice({
@@ -32,10 +41,17 @@ export const authSlice = createSlice({
         state.token = action.payload.token;
         state.user = action.payload.user || null;
       }
+    },
+    // Action to dynamically update user details in store and localStorage
+    updateUser: (state, action) => {
+      if (state.user) {
+        state.user = { ...state.user, ...action.payload };
+        localStorage.setItem('user', JSON.stringify(state.user));
+      }
     }
   },
 });
 
-export const { loginSuccess, logout, restoreSession } = authSlice.actions;
+export const { loginSuccess, logout, restoreSession, updateUser } = authSlice.actions;
 
 export default authSlice.reducer;
