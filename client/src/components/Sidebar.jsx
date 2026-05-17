@@ -1,17 +1,26 @@
 import React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { X, LayoutDashboard, HandCoins, LogOut } from 'lucide-react';
+import { X, LayoutDashboard, HandCoins, LogOut, Map, Mail } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/authSlice';
 import { Link, useLocation } from 'react-router-dom';
 
 const SIDEBAR_LINKS = [
   {
-    label: 'overview',
+    label: 'Overview',
     path: '/app',
     icon: LayoutDashboard,
   },
-  // Add more links here
+  {
+    label: 'Trips',
+    path: '/app/trips',
+    icon: Map,
+  },
+  {
+    label: 'Invitations',
+    path: '/app/invitations',
+    icon: Mail,
+  },
 ];
 
 const SidebarContent = ({ className = "" }) => {
@@ -31,7 +40,10 @@ const SidebarContent = ({ className = "" }) => {
         <div className="space-y-1">
           {SIDEBAR_LINKS.map((link) => {
             const Icon = link.icon;
-            const isActive = location.pathname === link.path;
+            const isActive =
+              link.path === '/app'
+                ? location.pathname === '/app'
+                : location.pathname.startsWith(link.path);
 
             return (
               <Link
