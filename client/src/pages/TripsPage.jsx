@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { MapPin, Plus, Trash2, Users } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { getTrips, createTrip, deleteTrip } from '../api/trips';
+import SearchableCitySelect from '../components/SearchableCitySelect';
 
 const CURRENCIES = ['SAR', 'USD', 'EUR', 'GBP'];
 
@@ -57,11 +58,10 @@ function CreateTripDialog({ onCreated }) {
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">City *</label>
-              <input
-                className="w-full border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-ring"
+              <SearchableCitySelect
                 value={form.city}
-                onChange={(e) => setForm({ ...form, city: e.target.value })}
-                placeholder="Riyadh"
+                onChange={(city) => setForm({ ...form, city })}
+                placeholder="Search Riyadh, Tokyo, London..."
               />
             </div>
             <div>
