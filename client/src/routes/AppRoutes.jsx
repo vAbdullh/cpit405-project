@@ -15,7 +15,6 @@ import AppPage from '../pages/AppPage';
 import TripsPage from '../pages/TripsPage';
 import TripDetails from '../pages/TripDetails';
 import InvitationsPage from '../pages/InvitationsPage';
-import Account from '../pages/Account';
 
 export default function AppRoutes() {
   return (
@@ -35,7 +34,6 @@ export default function AppRoutes() {
           <Route path="app/trips" element={<TripsPage />} />
           <Route path="app/trips/:tripId" element={<TripDetails />} />
           <Route path="app/invitations" element={<InvitationsPage />} />
-          <Route path="app/account" element={<Account />} />
         </Route>
       </Route>
     </Routes>
